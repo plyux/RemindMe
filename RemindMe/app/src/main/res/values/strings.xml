@@ -6,4 +6,8 @@
 
     <string name="view_navigation_open">Opne</string>
     <string name="view_navigation_close">Close</string>
+    <string name="birthday">Birthdays</string>
+    <string name="history">History</string>
+    <string name="ideas">Ideas</string>
+    <string name="todo">TODO</string>
 </resources>

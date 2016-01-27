@@ -1,5 +1,6 @@
 package ua.junior.remindme.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,16 +13,17 @@ import ua.junior.remindme.R;
 /**
  * Created by Вевдюк on 26.01.2016.
  */
-public class ExampleFragment extends Fragment{
+public class HistoryFragment extends AbstractTabFragment{
 
     private static final int LAYOUT = R.layout.fragment_example;
 
-    private View view;
 
-    public static ExampleFragment getInstance(){
+    public static HistoryFragment getInstance(Context context){
         Bundle args = new Bundle();
-        ExampleFragment fragment = new ExampleFragment();
+        HistoryFragment fragment = new HistoryFragment();
         fragment.setArguments(args);
+        fragment.setContext(context);
+        fragment.setTitle(context.getString(R.string.history));
 
         return fragment;
     }
@@ -32,4 +34,9 @@ public class ExampleFragment extends Fragment{
         view = inflater.inflate(LAYOUT, container, false);
         return view;
     }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
 }
