@@ -5,10 +5,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import ua.junior.remindme.R;
+import ua.junior.remindme.dto.RemindDTO;
 import ua.junior.remindme.fragments.AbstractTabFragment;
 import ua.junior.remindme.fragments.BirthdayFragment;
 import ua.junior.remindme.fragments.HistoryFragment;
@@ -23,9 +26,15 @@ public class TabsFragmentAdapter extends FragmentPagerAdapter{
     private Map<Integer, AbstractTabFragment> tabs;
     private Context context;
 
+    private HistoryFragment historyFragment;
+
+    private List<RemindDTO> data;
+
+
     public TabsFragmentAdapter(Context context, FragmentManager fm) {
         super(fm);
         this.context = context;
+        this.data = new ArrayList<>();
 
         initTabsMap(context);
 
@@ -48,9 +57,16 @@ public class TabsFragmentAdapter extends FragmentPagerAdapter{
 
     private void initTabsMap(Context context) {
         tabs = new HashMap<>();
-        tabs.put(0, HistoryFragment.getInstance(context));
+        historyFragment = HistoryFragment.getInstance(context, data);
+
+        tabs.put(0, historyFragment);
         tabs.put(1, IdeasFragment.getInstance(context));
         tabs.put(2, TodoFragment.getInstance(context));
         tabs.put(3, BirthdayFragment.getInstance(context));
+    }
+
+    public void setData(List<RemindDTO> data) {
+        this.data = data;
+        historyFragment.refreshData(data);
     }
 }
